@@ -1,0 +1,61 @@
+<%- include('./includes/head.ejs') %>
+<!-- <link rel="stylesheet" href="/css/hi.css" /> -->
+
+</head>
+
+<body style="background-image:
+url('/images/banner0.jpg');background-repeat: no-repeat;background-size: cover; background-position-y: center;
+">
+  <!-- https://images.pexels.com/photos/2688058/pexels-photo-2688058.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260 -->
+  <!-- https://images.pexels.com/photos/694740/pexels-photo-694740.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260 -->
+  <!-- https://images.pexels.com/photos/2946974/pexels-photo-2946974.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260 -->
+  <!-- https://images.pexels.com/photos/3747464/pexels-photo-3747464.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500 -->
+  <!-- https://images.pexels.com/photos/3747484/pexels-photo-3747484.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260 -->
+  <!-- https://images.pexels.com/photos/2908976/pexels-photo-2908976.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500 -->
+  <!-- <header id="header" class="alt">
+    <h1><a href="#">PaperBack </a> from CSE</h1>
+  </header> -->
+
+  <div class="row ">
+    <div class="col-md-3" style="margin-left: 65%; margin-top: 7%;">
+      <div class="card card-body " style="border-radius: 5%;">
+        <h4 class="text-center mb-3"><i class="fas fa-door-open" style="font-size: 25px;"></i> Login</h4>
+
+        <% if(success_msg != '') {%>
+        <div class="alert alert-success" role="alert">
+          <%= success_msg %>
+        </div>
+        <% } %>
+
+        <% if(error_msg != '') {%>
+        <div class="alert alert-danger" role="alert">
+          <%= error_msg %>
+        </div>
+        <% } %>
+
+        <% if(error != '') {%>
+        <div class="alert alert-danger" role="alert">
+          <%= error %>
+        </div>
+        <% } %>
+
+        <form action="/users/login" method="POST">
+          <div class="form-group">
+            <label for="email"><i class="far fa-envelope" style="font-size: 16px; padding-right: 5px"></i>Email</label>
+            <input type="email" id="email" name="email" class="form-control" placeholder="Enter EWU Email" />
+          </div>
+          <div class="form-group">
+            <label for="password"><i class="fas fa-lock"
+                style="font-size: 16px; padding-right: 5px"></i>Password</label>
+            <input type="password" id="password" name="password" class="form-control" placeholder="Enter Password" />
+          </div>
+          <button type="submit" class="col-6 m-auto btn btn-outline-primary btn-block">Login</button>
+        </form>
+        <p class="lead mt-4">
+          No Account? <a href="/users/register">Register</a>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <%- include('./includes/end.ejs') %>

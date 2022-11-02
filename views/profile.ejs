@@ -1,0 +1,99 @@
+<%- include('./includes/head.ejs') %>
+
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:wght@300&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <%- include('./includes/nav.ejs') %>
+
+  <main>
+    <div class="row">
+      <div class="col-3 ml-5">
+        <div class="card" style="height: 550px;margin-bottom: 10%;font-family: 'Open Sans Condensed', sans-serif;">
+          <h4 class="card-header m-auto"><%= rName %></h4>
+
+          <img class="m-auto" style="height: 50%; width: 80%; display: block;"
+            src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.shareicon.net%2Fdata%2F2016%2F07%2F26%2F801997_user_512x512.png&f=1&nofb=1"
+            alt="Card image">
+
+          <div class="card-body m-auto" style="margin-bottom: 10%; text-align: center;">
+            <% if(rdeptid != "Faculty") { %>
+            <h5 class="card-title" style="font-size:26px;">Student</h5>
+            <h6 class="card-subtitle " style="margin-bottom: 10%;font-size:18px;"><%=rUserID%></h6>
+            <h6 class="card-subtitle text-muted" style="margin-bottom: 10%;font-size:18px;"><%=rdeptid%></h6>
+            <% } else { %>
+            <h5 class="card-title" style="font-size:26px;">Faculty</h5>
+            <%}%>
+          </div>
+
+          <div>
+            <ul class="card-subtitle row ml-4" style="margin-top: 10%;">
+              <li class="list-group-item"><a onclick="window.open(this.href,'_blank');return false;"
+                  href="mailto:<%=rEmail%> "><i class="fas fa-envelope" style="font-size:24px;"></i></a></li>
+            <li class=" list-group-item"><a href="#"><i class="fas fa-heart" style="font-size:24px;"></i></a></li>
+            <li class="list-group-item"><a href="#"><i class="fas fa-thumbs-down" style="font-size:24px;"></i></a>
+            </li>
+            </ul>
+          </div>
+
+
+
+          <!-- <div class="card-body">++
+        <a href="#" class="card-link">Card link</a>
+        <a href="#" class="card-link">Another link</a>
+      </div> -->
+          <div class="card-footer text-muted m-auto">
+            active now
+          </div>
+        </div>
+        <% if(isAdmin == true && risAdmin == false) {%>
+        <a href="/users/<%=rUserID%>/makeAdmin" class="btn btn-secondary" style="margin-left: 20%;">Make Admin</a>
+        <a href="/users/<%=rUserID%>/disable" class="btn btn-secondary" style="margin-left: 2%;">Disable</a>
+        <% } %>
+      </div>
+
+      <div class="col-8">
+        <% if (prods.length > 0) { %>
+        <div class="row" style="margin: 2%;">
+          <% for (let product of prods) { 
+        if (product.userID == rUserID) {%>
+          <article class="col-4 mx-auto " style="margin-left: 10px;font-family: 'Open Sans Condensed', sans-serif;">
+
+            <header class="card__header" style="text-align: center; margin-top: 3%;">
+              <h5 class="product__title" style="text-align: center;"><%= product.title %></h5>
+            </header>
+
+            <div class=" card__image">
+              <img style="width: 100%;display: block;" src="<%= product.imgURL %>" alt="<%= product.title %>">
+            </div>
+
+            <div class="card__content">
+              <h5 style="text-align: center; padding-top: 5px;"><%= product.price %> BDT</h5>
+              <p class="product__description"><%= product.des %></p>
+            </div>
+            <div class="card__actions m-auto">
+
+              <% if(userID == rUserID) { %>
+              <a href="/editBook/<%= product._id %>" class="btn btn-primary" style="margin-left: 20%;">Edit Book</a>
+              <a href=" /users/<%= rUserID %>/deleteBook/<%= product._id %>" class="btn btn-danger"
+                style="margin-left: 2%;">Delete</a>
+              <% } else { 
+               id = product._id.toString() %>
+
+              <a href="/books/<%= id %>" class="btn btn-info" style="margin-left: 38%;"> Details</a>
+              <% } %>
+
+
+            </div>
+
+          </article>
+          <% } } %>
+        </div>
+        <% } else { %>
+        <h3 style=" text-align: center; margin: 10px 70px; font-family: 'Roboto' ;">No Products Found!</h3>
+        <% } %>
+      </div>
+    </div>
+
+  </main>
+  <%- include('./includes/end.ejs') %>
